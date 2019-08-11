@@ -33,7 +33,7 @@ export const duplicate = <T extends any>(target: T): T => {
 
         // tslint:disable-next-line: ban-types
         const asserted: Function = target as Function;
-        return function () {
+        return function (this: any) {
             // tslint:disable-next-line: no-invalid-this
             return asserted.apply(this, arguments);
         } as any as T;
