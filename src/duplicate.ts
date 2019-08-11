@@ -6,7 +6,7 @@
 
 import { types } from "util";
 
-export const duplicateObject = <T extends any>(target: T): T => {
+export const duplicate = <T extends any>(target: T): T => {
 
     if (target === null) {
         return target;
@@ -15,7 +15,7 @@ export const duplicateObject = <T extends any>(target: T): T => {
     if (Array.isArray(target)) {
 
         const asserted: any[] = target as any[];
-        return asserted.map((each: any) => duplicateObject(each)) as any as T;
+        return asserted.map((each: any) => duplicate(each)) as any as T;
     }
 
     if (typeof target === 'object') {
@@ -24,7 +24,7 @@ export const duplicateObject = <T extends any>(target: T): T => {
         return Object.entries(asserted).reduce((previous: Record<any, any>, current: [any, any]) => {
             return {
                 ...previous,
-                [current[0]]: current[1],
+                [current[0]]: duplicate(current[1]),
             };
         }, {} as Record<any, any>) as any as T;
     }
