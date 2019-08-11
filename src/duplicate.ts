@@ -12,6 +12,25 @@ export const duplicate = <T extends any>(target: T): T => {
         return target;
     }
 
+    if (types.isDate(target)) {
+
+        const asserted: Date = target as Date;
+        const clone: Date = new Date();
+        clone.setTime(asserted.getTime());
+
+        return clone as any as T;
+    }
+
+    if (typeof target === 'function') {
+
+        // tslint:disable-next-line: ban-types
+        const asserted: Function = target as Function;
+        return function (this: any) {
+            // tslint:disable-next-line: no-invalid-this
+            return asserted.apply(this, arguments);
+        } as any as T;
+    }
+
     if (Array.isArray(target)) {
 
         const asserted: any[] = target as any[];
@@ -27,25 +46,6 @@ export const duplicate = <T extends any>(target: T): T => {
                 [current[0]]: duplicate(current[1]),
             };
         }, {} as Record<any, any>) as any as T;
-    }
-
-    if (typeof target === 'function') {
-
-        // tslint:disable-next-line: ban-types
-        const asserted: Function = target as Function;
-        return function (this: any) {
-            // tslint:disable-next-line: no-invalid-this
-            return asserted.apply(this, arguments);
-        } as any as T;
-    }
-
-    if (types.isDate(target)) {
-
-        const asserted: Date = target as Date;
-        const clone: Date = new Date();
-        clone.setTime(asserted.getTime());
-
-        return clone as any as T;
     }
 
     return target;
