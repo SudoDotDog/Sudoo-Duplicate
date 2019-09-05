@@ -4,7 +4,7 @@
  * @description Duplicate
  */
 
-import { types } from "util";
+import { isDate } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
@@ -12,7 +12,7 @@ export const duplicate = <T extends any>(target: T): T => {
         return target;
     }
 
-    if (types.isDate(target)) {
+    if (isDate(target)) {
 
         const asserted: Date = target as Date;
         const clone: Date = new Date();
