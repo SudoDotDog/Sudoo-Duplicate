@@ -4,11 +4,11 @@
  * @description Duplicate
  */
 
-import { isArray, isDate, isFunction, isObject } from "./util";
+import { isArray, isDate, isFunction, isNull, isObject } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
-    if (target === null) {
+    if (isNull(target)) {
         return target;
     }
 

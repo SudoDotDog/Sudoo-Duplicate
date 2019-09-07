@@ -29,10 +29,15 @@ export const isFunction = (func: any): func is Function => {
     return typeof func === 'function';
 };
 
+export const isNull = (target: any): target is null => {
+
+    return target === null;
+};
+
 // tslint:disable-next-line: ban-types
 export const isObject = (object: any): object is Object => {
 
-    if (object === null) {
+    if (isNull(object)) {
         return false;
     }
 
