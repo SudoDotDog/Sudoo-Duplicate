@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/duplicate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": ":clipboard: Clone object",
   "main": "index.js",
   "directories": {
