@@ -21,3 +21,13 @@ export const isDate = (date: any): date is Date => {
 
     return true;
 };
+
+export const isObject = (object: any): object is Record<any, any> => {
+
+    if (object === null) {
+        return false;
+    }
+
+    const type = typeof object;
+    return type === 'object';
+};

@@ -4,7 +4,7 @@
  * @description Duplicate
  */
 
-import { isArray, isDate } from "./util";
+import { isArray, isDate, isObject } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
@@ -36,15 +36,14 @@ export const duplicate = <T extends any>(target: T): T => {
         return target.map((each: any) => duplicate(each)) as T;
     }
 
-    if (typeof target === 'object') {
+    if (isObject(target)) {
 
-        const asserted: Record<any, any> = target as any;
-        return Object.entries(asserted).reduce((previous: Record<any, any>, current: [any, any]) => {
+        return Object.entries(target).reduce((previous: Record<any, any>, current: [any, any]) => {
             return {
                 ...previous,
                 [current[0]]: duplicate(current[1]),
             };
-        }, {} as Record<any, any>) as any as T;
+        }, {} as Record<any, any>) as T;
     }
 
     return target;
