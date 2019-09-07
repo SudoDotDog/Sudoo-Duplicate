@@ -4,7 +4,8 @@
  * @description Util
  */
 
-export const isArray = (array: any): array is any[] => {
+// tslint:disable-next-line: array-type
+export const isArray = (array: any): array is Array<any> => {
 
     return Array.isArray(array);
 };
@@ -22,7 +23,14 @@ export const isDate = (date: any): date is Date => {
     return true;
 };
 
-export const isObject = (object: any): object is Record<any, any> => {
+// tslint:disable-next-line: ban-types
+export const isFunction = (func: any): func is Function => {
+
+    return typeof func === 'function';
+};
+
+// tslint:disable-next-line: ban-types
+export const isObject = (object: any): object is Object => {
 
     if (object === null) {
         return false;

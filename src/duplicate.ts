@@ -4,7 +4,7 @@
  * @description Duplicate
  */
 
-import { isArray, isDate, isObject } from "./util";
+import { isArray, isDate, isFunction, isObject } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
@@ -21,13 +21,11 @@ export const duplicate = <T extends any>(target: T): T => {
         return clone as any as T;
     }
 
-    if (typeof target === 'function') {
+    if (isFunction(target)) {
 
-        // tslint:disable-next-line: ban-types
-        const asserted: Function = target as Function;
         return function (this: any) {
             // tslint:disable-next-line: no-invalid-this
-            return asserted.apply(this, arguments);
+            return target.apply(this, arguments);
         } as any as T;
     }
 
