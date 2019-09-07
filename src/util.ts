@@ -44,3 +44,11 @@ export const isObject = (object: any): object is Object => {
     const type = typeof object;
     return type === 'object';
 };
+
+export const isError = (err: any): err is Error => {
+
+    if (err instanceof Error) {
+        return true;
+    }
+    return false;
+};
