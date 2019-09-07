@@ -4,6 +4,11 @@
  * @description Util
  */
 
+export const isArray = (array: any): array is any[] => {
+
+    return Array.isArray(array);
+};
+
 export const isDate = (date: any): date is Date => {
 
     if (!(date instanceof Date)) {
