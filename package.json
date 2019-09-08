@@ -1,7 +1,7 @@
 {
   "name": "@sudoo/duplicate",
   "version": "1.0.3",
-  "description": ":clipboard: Clone object",
+  "description": ":clipboard: Double object, double happiness",
   "main": "index.js",
   "directories": {
     "doc": "docs"
