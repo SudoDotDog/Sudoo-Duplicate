@@ -127,4 +127,31 @@ describe('Given [Duplicate] function', (): void => {
 
         expect(before.getTime()).to.be.not.equal(after.getTime());
     });
+
+    it('should be able to shallow clone object - map', (): void => {
+
+        const map: Map<string, string> = new Map();
+
+        const key: string = chance.string();
+        const value: string = chance.string();
+
+        map.set(key, value);
+
+        const after: Map<string, string> = duplicate(map);
+
+        expect(map).to.be.deep.equal(after);
+    });
+
+    it('should be able to shallow clone object - set', (): void => {
+
+        const set: Set<string> = new Set();
+
+        const value: string = chance.string();
+
+        set.add(value);
+
+        const after: Set<string> = duplicate(set);
+
+        expect(set).to.be.deep.equal(after);
+    });
 });
