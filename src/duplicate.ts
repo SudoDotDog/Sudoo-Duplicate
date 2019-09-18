@@ -4,7 +4,7 @@
  * @description Duplicate
  */
 
-import { isArray, isDate, isFunction, isNull, isObject, isRegExp } from "./util";
+import { isArray, isDate, isFunction, isMap, isNull, isObject, isRegExp, isSet } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
@@ -37,6 +37,16 @@ export const duplicate = <T extends any>(target: T): T => {
     if (isRegExp(target)) {
 
         return target;
+    }
+
+    if (isMap(target)) {
+
+        return new Map(target) as any as T;
+    }
+
+    if (isSet(target)) {
+
+        return new Set(target) as any as T;
     }
 
     if (isObject(target)) {
