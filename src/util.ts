@@ -52,3 +52,8 @@ export const isError = (err: any): err is Error => {
     }
     return false;
 };
+
+export const isRegExp = (target: any): target is RegExp => {
+
+    return target instanceof RegExp;
+};
