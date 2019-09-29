@@ -52,3 +52,18 @@ export const isError = (err: any): err is Error => {
     }
     return false;
 };
+
+export const isRegExp = (target: any): target is RegExp => {
+
+    return target instanceof RegExp;
+};
+
+export const isMap = (target: any): target is Map<any, any> => {
+
+    return target instanceof Map;
+};
+
+export const isSet = (target: any): target is Set<any> => {
+
+    return target instanceof Set;
+};
