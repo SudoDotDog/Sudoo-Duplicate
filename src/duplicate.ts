@@ -41,12 +41,13 @@ export const duplicate = <T extends any>(target: T): T => {
     }
 
     if (isObject(target)) {
-        return Object.entries(target).reduce((previous: Record<any, any>, current: [any, any]) => {
-            return {
-                ...previous,
-                [current[0]]: duplicate(current[1]),
-            };
-        }, {} as Record<any, any>) as T;
+
+        const clone: T = new (target as any).constructor();
+        for (const entry of Object.entries(target)) {
+            (clone as any)[entry[0]] = duplicate(entry[1]);
+        }
+
+        return clone;
     }
 
     return target;

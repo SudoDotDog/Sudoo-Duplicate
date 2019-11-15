@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/duplicate",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": ":clipboard: Double object, double happiness",
   "main": "index.js",
   "directories": {
@@ -22,7 +22,7 @@
   "dependencies": {},
   "devDependencies": {
     "@sudoo/io": "^1.6.1",
-    "@sudoo/triforce": "^1.9.0"
+    "@sudoo/triforce": "^2.0.3"
   },
   "nyc": {
     "extension": [

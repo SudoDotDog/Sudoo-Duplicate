@@ -8,6 +8,7 @@
 import { expect } from "chai";
 import * as Chance from "chance";
 import { duplicate } from "../../src/duplicate";
+import { MockClass } from "../mock/clazz";
 
 describe('Given [Duplicate] function', (): void => {
 
@@ -153,5 +154,22 @@ describe('Given [Duplicate] function', (): void => {
         const after: Set<string> = duplicate(set);
 
         expect(set).to.be.deep.equal(after);
+    });
+
+    it('should be able to clone prototype', (): void => {
+
+        const object: MockClass = new MockClass();
+        const value: string = chance.string();
+        const clonal = {
+
+            a: object,
+            b: value,
+        };
+
+        object.add();
+        const after: any = duplicate(clonal);
+        after.a.add();
+
+        expect(after.b).to.be.equal(value);
     });
 });
