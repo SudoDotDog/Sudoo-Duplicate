@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/duplicate",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": ":clipboard: Double object, double happiness",
   "main": "index.js",
   "directories": {
