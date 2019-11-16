@@ -42,12 +42,18 @@ export const duplicate = <T extends any>(target: T): T => {
 
     if (isObject(target)) {
 
-        const clone: T = new (target as any).constructor();
-        for (const entry of Object.entries(target)) {
-            (clone as any)[entry[0]] = duplicate(entry[1]);
-        }
+        try {
+            const clone: T = new (target as any).constructor();
+            for (const entry of Object.entries(target)) {
+                (clone as any)[entry[0]] = duplicate(entry[1]);
+            }
 
-        return clone;
+            return clone;
+        } catch (error) {
+
+            const clone = Object.assign(Object.create(Object.getPrototypeOf(target)), target);
+            return clone;
+        }
     }
 
     return target;

@@ -171,6 +171,7 @@ describe('Given [Duplicate] function', (): void => {
         const after: any = duplicate(clonal);
         after.a.add();
 
+        expect(after.a.get()).to.be.equal(2);
         expect(after.b).to.be.equal(value);
     });
 
@@ -190,6 +191,7 @@ describe('Given [Duplicate] function', (): void => {
         const after: any = duplicate(clonal);
         after.a.add();
 
+        expect(after.a.get()).to.be.equal(2);
         expect(after.b).to.be.equal(value);
     });
 });
