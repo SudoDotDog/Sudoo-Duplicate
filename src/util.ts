@@ -10,6 +10,11 @@ export const isArray = (array: any): array is Array<any> => {
     return Array.isArray(array);
 };
 
+export const isBigint = (value: any): value is bigint => {
+
+    return typeof value === 'bigint';
+};
+
 export const isDate = (date: any): date is Date => {
 
     if (!(date instanceof Date)) {

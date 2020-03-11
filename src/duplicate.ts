@@ -4,12 +4,17 @@
  * @description Duplicate
  */
 
-import { isArray, isDate, isFunction, isMap, isNull, isObject, isRegExp, isSet } from "./util";
+import { isArray, isBigint, isDate, isFunction, isMap, isNull, isObject, isRegExp, isSet } from "./util";
 
 export const duplicate = <T extends any>(target: T): T => {
 
     if (isNull(target)) {
         return target;
+    }
+
+    if (isBigint(target)) {
+        const parsed: number = Number(target);
+        return BigInt(parsed) as any as T;
     }
 
     if (isDate(target)) {
