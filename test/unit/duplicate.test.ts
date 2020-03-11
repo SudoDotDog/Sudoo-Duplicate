@@ -194,4 +194,17 @@ describe('Given [Duplicate] function', (): void => {
         expect(after.a.get()).to.be.equal(2);
         expect(after.b).to.be.equal(value);
     });
+
+    it('should be able to clone big int within', (): void => {
+
+        const value: number = chance.natural();
+        const object = {
+            a: BigInt(value),
+        };
+
+        const after: any = duplicate(object);
+
+        expect(typeof after.a).to.be.equal('bigint');
+        expect(Number(after.a)).to.be.equal(value);
+    });
 });
