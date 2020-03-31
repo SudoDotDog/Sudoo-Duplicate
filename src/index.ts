@@ -5,5 +5,6 @@
  */
 
 export * from "./duplicate";
+export * from "./json";
 export * from "./util";
 
