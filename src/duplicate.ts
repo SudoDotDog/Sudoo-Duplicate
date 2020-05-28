@@ -10,7 +10,7 @@ export const duplicate = <T extends any>(target: T): T => {
 
     const _duplicate = (innerTarget: T, parent?: any) => {
 
-        const constructorCloneObject = (constructorCloneTarget: T): T | null => {
+        const _constructorCloneObject = (constructorCloneTarget: T): T | null => {
             try {
                 const clone: T = new (constructorCloneTarget as any).constructor();
                 for (const entry of Object.entries(constructorCloneTarget)) {
@@ -22,7 +22,7 @@ export const duplicate = <T extends any>(target: T): T => {
             }
         };
 
-        const prototypeCloneObject = (prototypeCloneTarget: T): T | null => {
+        const _prototypeCloneObject = (prototypeCloneTarget: T): T | null => {
             try {
                 const prototype: any = Object.getPrototypeOf(prototypeCloneTarget);
                 const clone: any = Object.create(prototype);
@@ -55,13 +55,14 @@ export const duplicate = <T extends any>(target: T): T => {
         if (isFunction(innerTarget)) {
             // tslint:disable-next-line: ban-types
             const asserted: Function = innerTarget as Function;
+
             return ((...args: any[]) => {
-                return asserted.call(parent, ...args);
+                return asserted.apply(parent, args);
             }) as any as T;
         }
 
         if (isArray(innerTarget)) {
-            return innerTarget.map((each: any) => _duplicate(each)) as T;
+            return innerTarget.map((each: any) => _duplicate(each, parent)) as T;
         }
 
         if (isRegExp(innerTarget)) {
@@ -78,11 +79,11 @@ export const duplicate = <T extends any>(target: T): T => {
 
         if (isObject(innerTarget)) {
 
-            const constructorCloned: T | null = constructorCloneObject(innerTarget);
+            const constructorCloned: T | null = _constructorCloneObject(innerTarget);
             if (constructorCloned) {
                 return constructorCloned;
             }
-            const prototypeCloned: T | null = prototypeCloneObject(innerTarget);
+            const prototypeCloned: T | null = _prototypeCloneObject(innerTarget);
             if (prototypeCloned) {
                 return prototypeCloned;
             }
@@ -90,5 +91,5 @@ export const duplicate = <T extends any>(target: T): T => {
         }
         return innerTarget;
     };
-    return _duplicate(target, target);
+    return _duplicate(target);
 };

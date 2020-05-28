@@ -147,15 +147,9 @@ describe('Given [Duplicate] function', (): void => {
             },
         };
 
-        before.s = '1';
         const after: Record<string, any> = duplicate(before);
         before.parse(beforeValue);
         after.parse(afterValue);
-
-        console.log(value);
-
-        console.log(before[key], beforeValue);
-        console.log(after[key], afterValue);
 
         expect(before[key]).to.be.equal(beforeValue);
         expect(after[key]).to.be.equal(afterValue);
@@ -178,20 +172,14 @@ describe('Given [Duplicate] function', (): void => {
             },
         };
 
-        before.s = '1';
         before.parse = before.parse.bind(before);
 
         const after: Record<string, any> = duplicate(before);
         before.parse(beforeValue);
         after.parse(afterValue);
 
-        console.log(value);
-
-        console.log(before[key], beforeValue);
-        console.log(after[key], afterValue);
-
-        expect(before[key]).to.be.equal(beforeValue);
-        expect(after[key]).to.be.equal(afterValue);
+        expect(before[key]).to.be.equal(afterValue);
+        expect(after[key]).to.be.equal(value);
     });
 
     it('should be able to shallow clone object - map', (): void => {
