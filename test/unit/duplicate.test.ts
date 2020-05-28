@@ -130,7 +130,7 @@ describe('Given [Duplicate] function', (): void => {
         expect(before.getTime()).to.be.not.equal(after.getTime());
     });
 
-    it.only('should be able to deep clone object - function', (): void => {
+    it('should be able to deep clone object - function', (): void => {
 
         const key: string = chance.string();
         const value: string = chance.string();
@@ -147,9 +147,43 @@ describe('Given [Duplicate] function', (): void => {
             },
         };
 
+        before.s = '1';
         const after: Record<string, any> = duplicate(before);
         before.parse(beforeValue);
         after.parse(afterValue);
+
+        expect(before[key]).to.be.equal(beforeValue);
+        expect(after[key]).to.be.equal(afterValue);
+    });
+
+    it('should be able to deep clone object - function - binding', (): void => {
+
+        const key: string = chance.string();
+        const value: string = chance.string();
+
+        const beforeValue: string = 'before';
+        const afterValue: string = 'after';
+
+        const before: Record<string, any> = {
+            [key]: value,
+            // tslint:disable-next-line: object-literal-shorthand
+            parse: function (newValue: string) {
+                // tslint:disable-next-line: no-invalid-this
+                this[key] = newValue;
+            },
+        };
+
+        before.s = '1';
+        before.parse = before.parse.bind(before);
+
+        const after: Record<string, any> = duplicate(before);
+        before.parse(beforeValue);
+        after.parse(afterValue);
+
+        console.log(value);
+
+        console.log(before[key], beforeValue);
+        console.log(after[key], afterValue);
 
         expect(before[key]).to.be.equal(beforeValue);
         expect(after[key]).to.be.equal(afterValue);
