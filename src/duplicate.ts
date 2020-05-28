@@ -8,7 +8,14 @@ import { isArray, isBigint, isDate, isFunction, isMap, isNull, isObject, isRegEx
 
 export const duplicate = <T extends any>(target: T): T => {
 
+    const recursiveWatcher: Set<any> = new Set();
+
     const _duplicate = (innerTarget: T, parent?: any) => {
+
+        if (recursiveWatcher.has(innerTarget)) {
+            return innerTarget;
+        }
+        recursiveWatcher.add(innerTarget);
 
         const _constructorCloneObject = (constructorCloneTarget: T): T | null => {
             try {

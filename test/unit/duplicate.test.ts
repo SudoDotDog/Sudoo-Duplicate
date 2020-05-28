@@ -209,6 +209,24 @@ describe('Given [Duplicate] function', (): void => {
         expect(set).to.be.deep.equal(after);
     });
 
+    it('should be able to clone object - recursive', (): void => {
+
+        const upper: Record<string, any> = {
+            hello: null,
+            value: 1,
+        };
+        const inner: Record<string, any> = {
+            world: upper,
+            value: 2,
+        };
+
+        upper.hello = inner;
+
+        const after: Record<string, any> = duplicate(upper);
+
+        expect(after).to.be.deep.equal(upper);
+    });
+
     it('should be able to clone prototype', (): void => {
 
         const object: MockClass = new MockClass();
@@ -243,6 +261,7 @@ describe('Given [Duplicate] function', (): void => {
         const after: any = duplicate(clonal);
         after.a.add();
 
+        expect(object.get()).to.be.equal(1);
         expect(after.a.get()).to.be.equal(2);
         expect(after.b).to.be.equal(value);
     });
