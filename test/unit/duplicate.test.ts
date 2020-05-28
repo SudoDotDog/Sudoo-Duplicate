@@ -130,6 +130,19 @@ describe('Given [Duplicate] function', (): void => {
         expect(before.getTime()).to.be.not.equal(after.getTime());
     });
 
+    it('should be able to deep clone object - function', (): void => {
+
+        const key: string = chance.string();
+        const value: string = chance.string();
+        const object: Record<string, any> = {
+            [key]: value,
+        };
+
+        const after: Record<string, any> = duplicate(object);
+
+        expect(object).to.be.deep.equal(after);
+    });
+
     it('should be able to shallow clone object - map', (): void => {
 
         const map: Map<string, string> = new Map();
