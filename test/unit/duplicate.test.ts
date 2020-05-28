@@ -135,8 +135,8 @@ describe('Given [Duplicate] function', (): void => {
         const key: string = chance.string();
         const value: string = chance.string();
 
-        const beforeValue: string = chance.string();
-        const afterValue: string = chance.string();
+        const beforeValue: string = 'before';
+        const afterValue: string = 'after';
 
         const before: Record<string, any> = {
             [key]: value,
@@ -151,6 +151,11 @@ describe('Given [Duplicate] function', (): void => {
         const after: Record<string, any> = duplicate(before);
         before.parse(beforeValue);
         after.parse(afterValue);
+
+        console.log(value);
+
+        console.log(before[key], beforeValue);
+        console.log(after[key], afterValue);
 
         expect(before[key]).to.be.equal(beforeValue);
         expect(after[key]).to.be.equal(afterValue);

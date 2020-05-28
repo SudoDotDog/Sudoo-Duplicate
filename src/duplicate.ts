@@ -8,13 +8,13 @@ import { isArray, isBigint, isDate, isFunction, isMap, isNull, isObject, isRegEx
 
 export const duplicate = <T extends any>(target: T): T => {
 
-    const _duplicate = (innerTarget: T) => {
+    const _duplicate = (innerTarget: T, parent?: any) => {
 
         const constructorCloneObject = (constructorCloneTarget: T): T | null => {
             try {
                 const clone: T = new (constructorCloneTarget as any).constructor();
                 for (const entry of Object.entries(constructorCloneTarget)) {
-                    (clone as any)[entry[0]] = _duplicate(entry[1]);
+                    (clone as any)[entry[0]] = _duplicate(entry[1], clone);
                 }
                 return clone;
             } catch (error) {
@@ -27,7 +27,7 @@ export const duplicate = <T extends any>(target: T): T => {
                 const prototype: any = Object.getPrototypeOf(prototypeCloneTarget);
                 const clone: any = Object.create(prototype);
                 for (const entry of Object.entries(prototypeCloneTarget)) {
-                    (clone as any)[entry[0]] = _duplicate(entry[1]);
+                    (clone as any)[entry[0]] = _duplicate(entry[1], clone);
                 }
                 return clone;
             } catch (error) {
@@ -55,12 +55,9 @@ export const duplicate = <T extends any>(target: T): T => {
         if (isFunction(innerTarget)) {
             // tslint:disable-next-line: ban-types
             const asserted: Function = innerTarget as Function;
-            return function (this: any, ...args: any[]) {
-                console.log(this);
-                console.log(args);
-                // tslint:disable-next-line: no-invalid-this
-                return asserted.call(this, ...args);
-            } as any as T;
+            return ((...args: any[]) => {
+                return asserted.call(parent, ...args);
+            }) as any as T;
         }
 
         if (isArray(innerTarget)) {
@@ -93,5 +90,5 @@ export const duplicate = <T extends any>(target: T): T => {
         }
         return innerTarget;
     };
-    return _duplicate(target);
+    return _duplicate(target, target);
 };
