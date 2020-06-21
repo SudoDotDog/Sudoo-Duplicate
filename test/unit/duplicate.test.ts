@@ -140,9 +140,7 @@ describe('Given [Duplicate] function', (): void => {
 
         const before: Record<string, any> = {
             [key]: value,
-            // tslint:disable-next-line: object-literal-shorthand
-            parse: function (newValue: string) {
-                // tslint:disable-next-line: no-invalid-this
+            parse(newValue: string) {
                 this[key] = newValue;
             },
         };
@@ -165,9 +163,7 @@ describe('Given [Duplicate] function', (): void => {
 
         const before: Record<string, any> = {
             [key]: value,
-            // tslint:disable-next-line: object-literal-shorthand
-            parse: function (newValue: string) {
-                // tslint:disable-next-line: no-invalid-this
+            parse(newValue: string) {
                 this[key] = newValue;
             },
         };

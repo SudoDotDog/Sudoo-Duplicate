@@ -17,7 +17,7 @@ describe('Given [Util] functions', (): void => {
 
         const date = new Date();
 
-        // tslint:disable-next-line: no-unused-expression
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(isDate(date)).to.be.true;
     });
 
@@ -25,7 +25,7 @@ describe('Given [Util] functions', (): void => {
 
         const date = chance.date();
 
-        // tslint:disable-next-line: no-unused-expression
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(isDate(date)).to.be.true;
     });
 
@@ -33,7 +33,7 @@ describe('Given [Util] functions', (): void => {
 
         const date = chance.string();
 
-        // tslint:disable-next-line: no-unused-expression
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(isDate(date)).to.be.false;
     });
 
@@ -41,7 +41,7 @@ describe('Given [Util] functions', (): void => {
 
         const date = new Date(chance.string());
 
-        // tslint:disable-next-line: no-unused-expression
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(isDate(date)).to.be.false;
     });
 });

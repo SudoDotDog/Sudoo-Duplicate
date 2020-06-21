@@ -30,7 +30,7 @@ const _prototypeCloneObject = <T extends any>(
         const prototype: any = Object.getPrototypeOf(target);
         const clone: any = Object.create(prototype);
         for (const entry of Object.entries(target as any)) {
-            (clone as any)[entry[0]] = _duplicate(entry[1] as any, clone);
+            clone[entry[0]] = _duplicate(entry[1] as any, clone);
         }
         return clone;
     } catch (error) {
@@ -68,6 +68,7 @@ export const duplicate = <T extends any>(target: T): T => {
         }
 
         if (isFunction(innerTarget)) {
+            // eslint-disable-next-line @typescript-eslint/ban-types
             const asserted: Function = innerTarget as Function;
 
             return ((...args: any[]) => {

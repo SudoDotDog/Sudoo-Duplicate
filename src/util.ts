@@ -4,8 +4,7 @@
  * @description Util
  */
 
-// tslint:disable-next-line: array-type
-export const isArray = (array: any): array is Array<any> => {
+export const isArray = (array: any): array is any[] => {
 
     return Array.isArray(array);
 };
@@ -28,7 +27,7 @@ export const isDate = (date: any): date is Date => {
     return true;
 };
 
-// tslint:disable-next-line: ban-types
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const isFunction = (func: any): func is Function => {
 
     return typeof func === 'function';
@@ -39,7 +38,7 @@ export const isNull = (target: any): target is null => {
     return target === null;
 };
 
-// tslint:disable-next-line: ban-types
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const isObject = (object: any): object is Object => {
 
     if (isNull(object)) {
