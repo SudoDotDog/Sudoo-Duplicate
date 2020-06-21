@@ -6,7 +6,6 @@
 
 import { isArray, isBigint, isDate, isFunction, isMap, isNull, isObject, isRegExp, isSet } from "./util";
 
-
 const _constructorCloneObject = <T extends any>(
     target: T,
     _duplicate: (target: T, parent?: any) => any,
