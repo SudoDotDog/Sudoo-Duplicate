@@ -68,7 +68,6 @@ export const duplicate = <T extends any>(target: T): T => {
         }
 
         if (isFunction(innerTarget)) {
-            // tslint:disable-next-line: ban-types
             const asserted: Function = innerTarget as Function;
 
             return ((...args: any[]) => {
