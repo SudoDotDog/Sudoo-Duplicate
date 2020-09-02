@@ -6,9 +6,11 @@
 
 import { isArray, isBigint, isDate, isFunction, isMap, isNull, isObject, isRegExp, isSet } from "./util";
 
+export type DuplicateFunction<T> = (target: T, parent?: any) => T;
+
 const _constructorCloneObject = <T extends any>(
     target: T,
-    _duplicate: (target: T, parent?: any) => any,
+    _duplicate: DuplicateFunction<T>,
 ): T | null => {
     try {
         const clone: T = new (target as any).constructor();
@@ -23,7 +25,7 @@ const _constructorCloneObject = <T extends any>(
 
 const _prototypeCloneObject = <T extends any>(
     target: T,
-    _duplicate: (target: T, parent?: any) => any,
+    _duplicate: DuplicateFunction<T>,
 ): T | null => {
     try {
         const prototype: any = Object.getPrototypeOf(target);
