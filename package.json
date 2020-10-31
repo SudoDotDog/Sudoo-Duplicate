@@ -15,10 +15,9 @@
     "url": "https://github.com/SudoDotDog/Sudoo-Duplicate/issues"
   },
   "homepage": "https://github.com/SudoDotDog/Sudoo-Duplicate#readme",
-  "dependencies": {},
   "devDependencies": {
     "@sudoo/io": "^1.8.0",
-    "@sudoo/triforce": "^2.8.5"
+    "@sudoo/triforce": "^2.9.6"
   },
   "nyc": {
     "extension": [
